@@ -1,9 +1,9 @@
 //  TodoModel.js
-const { DataTypes } = require("sequelize");
+const { DataTypes, Model } = require("sequelize");
 const { sequelize } = require("./connectDB.js");
 
-const Todo = sequelize.define(
-  "Todo",
+class Todo extends Model { }
+Todo.init(
   {
     // Model attributes are defined here
     title: {
@@ -13,13 +13,14 @@ const Todo = sequelize.define(
     dueDate: {
       type: DataTypes.DATEONLY,
     },
-    complete: {
+    completed: {
       type: DataTypes.BOOLEAN,
     },
   },
   {
-    tableName: "todos",
+    sequelize,
   }
 );
+
+Todo.sync();
 module.exports = Todo;
-Todo.sync(); // create the table
