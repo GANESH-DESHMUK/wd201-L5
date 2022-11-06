@@ -66,10 +66,25 @@ const updateItem = async (id) => {
     console.error(error);
   }
 }
+
+const deleteItem = async (id) => {
+  try {
+    const deleteRowCount = await Todo.destroy({
+      where: {
+        id: id
+      }
+    });
+    console.log(`Deleted ${deleteRowCount} rows!`);
+  }
+  catch (error) {
+    console.error(error);
+  }
+}
 (async () => {
   //await createTodo();
   //await countItems();
   await getAllTodos();
-  await updateItem(2);
+  //await updateItem(2);
+  await deleteItem(2);
   await getAllTodos();
 })();
