@@ -1,4 +1,5 @@
 const { connect } = require("./connectDB.js");
+const { sync } = require("./TodoModel.js");
 const Todo = require("./TodoModel.js");
 
 const createTodo = async () => {
@@ -27,14 +28,7 @@ const countItems = async () => {
 }
 const getAllTodos = async () => {
   try {
-    const todos = await Todo.findAll({
-      where: {
-        completed: false
-      },
-      order: [
-        ['id', 'DESC']
-      ]
-    });
+    const todos = await Todo.findAll();
     const todoList = todos.map(todo => todo.displayableString()).join("\n");
     console.log(todoList);
   }
@@ -59,9 +53,23 @@ const getSingleTodo = async () => {
     console.error(error);
   }
 }
+
+const updateItem = async (id) => {
+  try {
+    await Todo.update({ completed: true }, {
+      where: {
+        id: id
+      }
+    })
+  }
+  catch (error) {
+    console.error(error);
+  }
+}
 (async () => {
   //await createTodo();
   //await countItems();
   await getAllTodos();
-  await getSingleTodo();
+  await updateItem(2);
+  await getAllTodos();
 })();
