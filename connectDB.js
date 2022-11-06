@@ -6,6 +6,7 @@ const password = "MEDHU@1234";
 const sequelize = new Sequelize(database, username, password, {
   host: "localhost",
   dialect: "postgres",
+  logging: false,
 });
 
 const connect = async () => {

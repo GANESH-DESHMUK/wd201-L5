@@ -29,7 +29,7 @@ const getAllTodos = async () => {
   try {
     const todos = await Todo.findAll({
       where: {
-        completed: true
+        completed: false
       },
       order: [
         ['id', 'DESC']
@@ -42,8 +42,26 @@ const getAllTodos = async () => {
     console.error(error);
   }
 }
+const getSingleTodo = async () => {
+  try {
+    const todo = await Todo.findOne({
+      where: {
+        completed: false
+      },
+      order: [
+        ['id', 'DESC']
+      ]
+    });
+
+    console.log(todo.displayableString());
+  }
+  catch (error) {
+    console.error(error);
+  }
+}
 (async () => {
   //await createTodo();
   //await countItems();
   await getAllTodos();
+  await getSingleTodo();
 })();
