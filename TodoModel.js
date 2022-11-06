@@ -6,6 +6,9 @@ class Todo extends Model {
   static async addTask(params) {
     return await Todo.create(params);
   }
+  displayableString() {
+    return `${this.id}. ${this.title}. ${this.dueDate}`;
+  }
 }
 Todo.init(
   {
