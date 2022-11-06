@@ -15,6 +15,17 @@ const createTodo = async () => {
     console.error(error);
   }
 }
+
+const countItems = async () => {
+  try {
+    const totalCount = await Todo.count();
+    console.log(`Found ${totalCount} items in the table`);
+  }
+  catch (error) {
+    console.error(error);
+  }
+}
 (async () => {
-  await createTodo();
+  //await createTodo();
+  await countItems();
 })();
