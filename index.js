@@ -81,10 +81,15 @@ const deleteItem = async (id) => {
   }
 }
 (async () => {
+  await getAllTodos();
+  await countItems();
+})();
+
+//(async () => {
   //await createTodo();
   //await countItems();
-  await getAllTodos();
+  //await getAllTodos();
   //await updateItem(2);
-  await deleteItem(2);
-  await getAllTodos();
-})();
+  //await deleteItem(2);
+  //await getAllTodos();
+//})();
