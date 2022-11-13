@@ -4,6 +4,7 @@
   "description": "\"Adding database to todo app\"",
   "main": "index.js",
   "scripts": {
+    "format": "prettier --write \"./**/*.{js,jsx}\"",
     "db:create:test": "NODE_ENV=test npx sequelize-cli db:create",
     "pretest": "NODE_ENV=test npx sequelize-cli db:drop && NODE_ENV=test npx sequelize-cli db:create",
     "test": "NODE_ENV=test jest --detectOpenHandles",
@@ -17,6 +18,7 @@
     "sequelize": "^6.25.3"
   },
   "devDependencies": {
+    "prettier": "^2.7.1",
     "sequelize-cli": "^6.5.2"
   }
 }
