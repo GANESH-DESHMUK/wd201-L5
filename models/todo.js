@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       // FILL IN HERE
       const overdueitems = await Todo.overdue();
       const todolist = overdueitems
-        .map((todos) => todos.displayableString())
+        .map(todos => todos.displayableString())
         .join("\n");
       console.log(todolist);
       console.log("\n");
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       // FILL IN HERE
       const duetodayitems = await Todo.dueToday();
       const todolist1 = duetodayitems
-        .map((todos) => todos.displayableString())
+        .map(todos => todos.displayableString())
         .join("\n");
       console.log(todolist1);
       console.log("\n");
@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       // FILL IN HERE
       const duelateritems = await Todo.dueLater();
       const todolist2 = duelateritems
-        .map((todos) => todos.displayableString())
+        .map(todos => todos.displayableString())
         .join("\n");
       console.log(todolist2);
     }
@@ -96,9 +96,8 @@ module.exports = (sequelize, DataTypes) => {
     displayableString() {
       const today = new Date().toLocaleDateString("en-CA");
       let checkbox = this.completed ? "[x]" : "[ ]";
-      return `${this.id}. ${checkbox} ${this.title} ${
-        this.dueDate == today ? " " : this.dueDate
-      }`;
+      return `${this.id}. ${checkbox} ${this.title} ${this.dueDate == today ? " " : this.dueDate
+        }`.trim();
     }
   }
   Todo.init(
