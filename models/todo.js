@@ -17,27 +17,21 @@ module.exports = (sequelize, DataTypes) => {
       console.log("Overdue");
       // FILL IN HERE
       const overdueitems = await Todo.overdue();
-      const todolist = overdueitems
-        .map(todos => todos.displayableString())
-        .join("\n");
+      const todolist = overdueitems.map(todos => todos.displayableString()).join("\n");
       console.log(todolist);
       console.log("\n");
 
       console.log("Due Today");
       // FILL IN HERE
       const duetodayitems = await Todo.dueToday();
-      const todolist1 = duetodayitems
-        .map(todos => todos.displayableString())
-        .join("\n");
+      const todolist1 = duetodayitems.map(todos => todos.displayableString()).join("\n");
       console.log(todolist1);
       console.log("\n");
 
       console.log("Due Later");
       // FILL IN HERE
       const duelateritems = await Todo.dueLater();
-      const todolist2 = duelateritems
-        .map(todos => todos.displayableString())
-        .join("\n");
+      const todolist2 = duelateritems.map(todos => todos.displayableString()).join("\n");
       console.log(todolist2);
     }
 
@@ -51,7 +45,9 @@ module.exports = (sequelize, DataTypes) => {
           },
           completed: false,
         },
-        order: [["id", "ASC"]],
+        order: [
+          ["id", "ASC"]
+        ]
       });
     }
 
@@ -64,7 +60,9 @@ module.exports = (sequelize, DataTypes) => {
             [Op.eq]: today,
           },
         },
-        order: [["id", "ASC"]],
+        order: [
+          ["id", "ASC"]
+        ]
       });
     }
 
@@ -74,10 +72,12 @@ module.exports = (sequelize, DataTypes) => {
       return Todo.findAll({
         where: {
           dueDate: {
-            [Op.gt]: today,
+            [Op.gt]: today
           },
         },
-        order: [["id", "ASC"]],
+        order: [
+          ["id", "ASC"]
+        ]
       });
     }
 
@@ -88,16 +88,14 @@ module.exports = (sequelize, DataTypes) => {
         {
           where: {
             id: id,
-          },
-        }
-      );
+          }
+        });
     }
 
     displayableString() {
       const today = new Date().toLocaleDateString("en-CA");
       let checkbox = this.completed ? "[x]" : "[ ]";
-      return `${this.id}. ${checkbox} ${this.title} ${this.dueDate == today ? " " : this.dueDate
-        }`.trim();
+      return `${this.id}. ${checkbox} ${this.title} ${this.dueDate == today ? " " : this.dueDate}`;
     }
   }
   Todo.init(
