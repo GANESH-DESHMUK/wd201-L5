@@ -42,13 +42,13 @@ module.exports = (sequelize, DataTypes) => {
         where: {
           dueDate: {
             [Op.lt]: today,
-            completed: false,
-          },
 
+          },
+          // completed: false,
         },
         order: [
           ["id", "ASC"]
-        ]
+        ],
       });
     }
 
@@ -63,7 +63,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         order: [
           ["id", "ASC"]
-        ]
+        ],
       });
     }
 
@@ -78,25 +78,23 @@ module.exports = (sequelize, DataTypes) => {
         },
         order: [
           ["id", "ASC"]
-        ]
+        ],
       });
     }
 
     static async markAsComplete(id) {
       // FILL IN HERE TO MARK AN ITEM AS COMPLETE
-      return Todo.update(
-        { completed: true },
-        {
-          where: {
-            id: id,
-          }
-        });
+      return Todo.update({ completed: true }, {
+        where: {
+          id: id,
+        },
+      });
     }
 
     displayableString() {
       const today = new Date().toLocaleDateString("en-CA");
       let checkbox = this.completed ? "[x]" : "[ ]";
-      return `${this.id}. ${checkbox} ${this.title} ${this.dueDate == today ? " " : this.dueDate}`.trim();
+      return `${this.id}. ${checkbox} ${this.title} ${this.dueDate == today ? '' : this.dueDate}`.trim();
     }
   }
   Todo.init(
